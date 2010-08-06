@@ -23,7 +23,7 @@ is $x.pop, "b", "Pop from list";
 is $x.tail.next.defined, Bool::False, "Next setting in pop";
 my $tmp = $x.pop;
 
-is $x.tail.defined, Bool::False, "Tail setting to Nil after pop element";
-is $x.head.defined, Bool::False, "Head setting to Nil after pop element";
+is $x.tail.defined, Bool::False, "Tail setting to Sentinel after pop element";
+is $x.head.defined, Bool::False, "Head setting to Sentinel after pop element";
 
 # vim: ft=perl6

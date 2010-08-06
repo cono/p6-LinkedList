@@ -1,18 +1,24 @@
 use v6;
 
 class LinkedList::Element {
-    has $.next is rw;
+    has LinkedList::Element $.next is rw;
     has $.value is rw;
-    has $.prev is rw;
+    has LinkedList::Element $.prev is rw;
 
     method Str {
         ~self.value;
     }
 }
 
+class LinkedList::Element::Sentinel is LinkedList::Element {
+    method defined { Bool::False }
+}
+
+my LinkedList::Element::Sentinel $SENTINEL .= new;
+
 class LinkedList::Singly {
-    has $.head is rw;
-    has $.tail is rw;
+    has LinkedList::Element $.head is rw = $SENTINEL;
+    has LinkedList::Element $.tail is rw = $SENTINEL;
 
     method push($value) {
         my LinkedList::Element $tmp .= new(:$value);
@@ -33,7 +39,7 @@ class LinkedList::Singly {
             $.head = $.head.next;
 
             unless $.head.defined {
-                $.tail = Nil;
+                $.tail = $SENTINEL;
             }
         }
 
@@ -75,7 +81,7 @@ class LinkedList::Doubly is LinkedList::Singly {
 
     method shift {
         if $.head.next.defined {
-            $.head.next.prev = Nil;
+            $.head.next.prev = $SENTINEL;
         }
 
         nextsame;
@@ -96,9 +102,9 @@ class LinkedList::Doubly is LinkedList::Singly {
         if $result.defined {
             if $.tail.prev.defined {
                 $.tail = $.tail.prev;
-                $.tail.next = Nil;
+                $.tail.next = $SENTINEL;
             } else {
-                $.head = $.tail = Nil;
+                $.head = $.tail = $SENTINEL;
             }
         }
 
