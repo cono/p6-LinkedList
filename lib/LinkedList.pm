@@ -14,8 +14,8 @@ class LinkedList::Singly {
     has $.head is rw;
     has $.tail is rw;
 
-    method push($val) {
-        my LinkedList::Element $tmp .= new(:value($val));
+    method push($value) {
+        my LinkedList::Element $tmp .= new(:$value);
 
         if $.tail.defined {
             $.tail.next = $tmp;
@@ -40,8 +40,8 @@ class LinkedList::Singly {
         $result;
     }
 
-    method unshift($val) {
-        my LinkedList::Element $tmp .= new(:value($val));
+    method unshift($value) {
+        my LinkedList::Element $tmp .= new(:$value);
 
         if $.head.defined {
             $tmp.next = $.head;
@@ -65,7 +65,7 @@ class LinkedList::Singly {
 }
 
 class LinkedList::Doubly is LinkedList::Singly {
-    method push($val) {
+    method push($value) {
         my $tmp = $.tail;
         callsame;
         $.tail.prev = $tmp;
@@ -81,7 +81,7 @@ class LinkedList::Doubly is LinkedList::Singly {
         nextsame;
     }
 
-    method unshift($val) {
+    method unshift($value) {
         callsame;
         if $.head.next.defined {
             $.head.next.prev = $.head;
