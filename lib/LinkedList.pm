@@ -59,7 +59,7 @@ class LinkedList::Singly {
         self;
     }
 
-    method iterate {
+    method list {
         my $tmp = $.head;
         gather {
             while ($tmp.defined) {
@@ -109,6 +109,16 @@ class LinkedList::Doubly is LinkedList::Singly {
         }
 
         $result;
+    }
+
+    method descending {
+        my $tmp = $.tail;
+        gather {
+            while ($tmp.defined) {
+                take $tmp;
+                $tmp = $tmp.prev;
+            }
+        }
     }
 }
 

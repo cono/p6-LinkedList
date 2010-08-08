@@ -26,6 +26,6 @@ $x.unshift("a");
 is ~$x.head, "a", "Unshift to non-empty list (head element)";
 is ~$x.tail, "b", "Unshift to non-empty list (tail element)";
 
-is $x.iterate.map({~$_}).join('|'), "a|b", "Iterate";
+is $x.list.map({~$_}).join('|'), "a|b", "Lazy list";
 
 # vim: ft=perl6

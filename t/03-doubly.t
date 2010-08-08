@@ -2,7 +2,7 @@ use v6;
 use Test;
 use LinkedList;
 
-plan 12;
+plan 13;
 
 my LinkedList::Doubly $x .= new;
 
@@ -10,6 +10,7 @@ is $x.push("a"), $x, "Return self from push";
 is $x.tail.prev.defined, Bool::False, "Prev setting in push to empty list";
 
 $x.push("b");
+is $x.descending.map({~$_}).join('|'), "b|a", "Descending lazy list";
 is ~$x.tail.prev, "a", "Prev setting in push to non-empty list";
 is ~$x.shift, "a", "Return value from shift";
 is $x.tail.prev.defined, Bool::False, "Prev setting in shift";
